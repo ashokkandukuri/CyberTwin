@@ -1,0 +1,46 @@
+<button
+    routerLink="/"
+    class="ring-offset-background absolute end-4 top-4 flex items-center justify-center rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden disabled:pointer-events-none [&_ng-icon]:shrink-0">
+    <ng-icon name="lucideX" size="1rem" />
+</button>
+<div hlmCardHeader>
+    <h3 hlmCardTitle>{{ node().name }}</h3>
+    <p hlmCardDescription>{{ node().ip }}</p>
+</div>
+<div
+    class="bg-muted text-muted-foreground mx-6 mt-6 mb-4 inline-flex h-10 items-center justify-center space-x-1 rounded-md p-1">
+    <button
+        routerLink="network-traffic"
+        class="ring-offset-background focus-visible:ring-ring inline-flex flex-1 items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
+        routerLinkActive="bg-background text-foreground shadow-xs">
+        {{ "NETWORK_TRAFFIC" | translate }}
+    </button>
+    @if (NodeType.AttackerTypes.includes(this.node().type)) {
+        <button
+            routerLink="attack"
+            class="ring-offset-background focus-visible:ring-ring inline-flex flex-1 items-center justify-center gap-1 rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
+            routerLinkActive="bg-background text-foreground shadow-xs">
+            <ng-icon name="lucideGhost" size="1rem" />
+            {{ "PHANTOM_ATTACKER" | translate }}
+        </button>
+    }
+    <button
+        routerLink="digital-twin"
+        class="ring-offset-background focus-visible:ring-ring inline-flex flex-1 items-center justify-center gap-1 rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
+        routerLinkActive="bg-background text-foreground shadow-xs">
+        <ng-icon name="lucideShield" size="1rem" />
+        {{ "DIGITAL_TWIN" | translate }}
+    </button>
+    <button
+        routerLink="configuration"
+        class="ring-offset-background focus-visible:ring-ring inline-flex flex-1 items-center justify-center rounded-sm px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden"
+        routerLinkActive="bg-background text-foreground shadow-xs">
+        {{ "CONFIGURATION" | translate }}
+    </button>
+</div>
+<div
+    hlmCardContent
+    [@fadeAnimation]="getAnimationData(outlet)"
+    class="flex-1 overflow-y-auto">
+    <router-outlet #outlet="outlet" />
+</div>

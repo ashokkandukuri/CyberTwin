@@ -1,0 +1,34 @@
+<svg
+    class="pointer-events-none absolute z-0 origin-center -translate-x-1/2 -translate-y-1/2"
+    [style]="{
+        left: 'calc(50% + ' + (node1.x + node2.x) / 2 + 'px)',
+        top: 'calc(50% - ' + (node1.y + node2.y) / 2 + 'px)',
+        width: w + 'px',
+        height: h + 'px',
+    }">
+    <line
+        hlmTooltipTrigger
+        (click)="onClick()"
+        [attr.x1]="node1.x - t.x"
+        [attr.y1]="t.y - node1.y"
+        [attr.x2]="node2.x - t.x"
+        [attr.y2]="t.y - node2.y"
+        class="pseudo-connection" />
+    <line
+        [attr.x1]="node1.x - t.x"
+        [attr.y1]="t.y - node1.y"
+        [attr.x2]="node2.x - t.x"
+        [attr.y2]="t.y - node2.y"
+        class="connection"
+        [ngClass]="{ animate, reverse, 'attack-active': attackActive() }" />
+    <circle
+        [attr.cx]="point.x - t.x"
+        [attr.cy]="t.y - point.y"
+        r="5"
+        class="cyber-shield {{
+            connection().cyberShield.enabled && connection().cyberShield.model
+                ? connection().cyberShield.state
+                : 'disabled'
+        }}"
+        [ngClass]="{ animate }" />
+</svg>

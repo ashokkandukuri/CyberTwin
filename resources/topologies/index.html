@@ -1,0 +1,24 @@
+---
+layout: default
+title: Network Topology
+---
+
+<h1>Network Topology</h1>
+<p>
+    This directory contains <i>.yaml</i> files that define different network
+    architectures for the simulator.
+</p>
+
+<ul>
+    {% for file in site.static_files %} {% if file.path contains
+    'resources/topologies/' and file.extname == '.yaml' %}
+    <li>
+        <strong>{{ file.name }}</strong>
+        <br />
+        <a href="{{ site.baseurl }}{{ file.path }}" download>[Download YAML]</a>
+    </li>
+    {% endif %} {% endfor %}
+</ul>
+
+<hr />
+<a href="{{ site.baseurl }}/resources">← Back to Resources</a>

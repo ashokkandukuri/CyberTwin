@@ -1,0 +1,694 @@
+exportedAt: '2026-01-08T08:14:49.063Z'
+router:
+  name: 'Main Router'
+  mac: '7e:eb:8b:83:80:be'
+  ip: '192.168.0.1'
+  position:
+    x: 0
+    y: 0
+devices:
+  - name: 'IoT Temp Sensor 01'
+    mac: 'b3:50:31:c6:02:01'
+    ip: '192.168.0.2'
+    type: 'iot'
+    position:
+      x: -150
+      y: -350
+    connection:
+      latency: 200
+      latencyVariation: 50
+      bandwidth: 256
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Hallway Camera 02'
+    mac: 'b3:50:31:c6:02:02'
+    ip: '192.168.0.3'
+    type: 'iot'
+    position:
+      x: -250
+      y: -300
+    connection:
+      latency: 120
+      latencyVariation: 20
+      bandwidth: 4096
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Entry Light 03'
+    mac: 'b3:50:31:c6:02:03'
+    ip: '192.168.0.4'
+    type: 'iot'
+    position:
+      x: -350
+      y: -250
+    connection:
+      latency: 180
+      latencyVariation: 30
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Thermostat 04'
+    mac: 'b3:50:31:c6:02:04'
+    ip: '192.168.0.5'
+    type: 'iot'
+    position:
+      x: -450
+      y: -200
+    connection:
+      latency: 220
+      latencyVariation: 40
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Smart Lock 05'
+    mac: 'b3:50:31:c6:02:05'
+    ip: '192.168.0.6'
+    type: 'iot'
+    position:
+      x: -150
+      y: -150
+    connection:
+      latency: 250
+      latencyVariation: 60
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Smoke Sensor 06'
+    mac: 'b3:50:31:c6:02:06'
+    ip: '192.168.0.7'
+    type: 'iot'
+    position:
+      x: -250
+      y: -100
+    connection:
+      latency: 300
+      latencyVariation: 80
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Plug A 07'
+    mac: 'b3:50:31:c6:02:07'
+    ip: '192.168.0.8'
+    type: 'iot'
+    position:
+      x: -350
+      y: -50
+    connection:
+      latency: 150
+      latencyVariation: 25
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Plug B 08'
+    mac: 'b3:50:31:c6:02:08'
+    ip: '192.168.0.9'
+    type: 'iot'
+    position:
+      x: -450
+      y: 0
+    connection:
+      latency: 155
+      latencyVariation: 25
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Speaker 09'
+    mac: 'b3:50:31:c6:02:09'
+    ip: '192.168.0.10'
+    type: 'iot'
+    position:
+      x: -150
+      y: 50
+    connection:
+      latency: 90
+      latencyVariation: 15
+      bandwidth: 2048
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Kitchen TV 10'
+    mac: 'b3:50:31:c6:02:0A'
+    ip: '192.168.0.11'
+    type: 'iot'
+    position:
+      x: -250
+      y: 100
+    connection:
+      latency: 60
+      latencyVariation: 10
+      bandwidth: 8192
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Fridge 11'
+    mac: 'b3:50:31:c6:02:0B'
+    ip: '192.168.0.12'
+    type: 'iot'
+    position:
+      x: -350
+      y: 150
+    connection:
+      latency: 210
+      latencyVariation: 45
+      bandwidth: 512
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Washing Machine 12'
+    mac: 'b3:50:31:c6:02:0C'
+    ip: '192.168.0.13'
+    type: 'iot'
+    position:
+      x: -450
+      y: 200
+    connection:
+      latency: 220
+      latencyVariation: 50
+      bandwidth: 256
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Blind 13'
+    mac: 'b3:50:31:c6:02:0D'
+    ip: '192.168.0.14'
+    type: 'iot'
+    position:
+      x: -150
+      y: 250
+    connection:
+      latency: 190
+      latencyVariation: 35
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Irrigation 14'
+    mac: 'b3:50:31:c6:02:0E'
+    ip: '192.168.0.15'
+    type: 'iot'
+    position:
+      x: -250
+      y: 300
+    connection:
+      latency: 280
+      latencyVariation: 70
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Garden Sensor 15'
+    mac: 'b3:50:31:c6:02:0F'
+    ip: '192.168.0.16'
+    type: 'iot'
+    position:
+      x: -350
+      y: 350
+    connection:
+      latency: 290
+      latencyVariation: 65
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Garage Door 16'
+    mac: 'b3:50:31:c6:02:10'
+    ip: '192.168.0.17'
+    type: 'iot'
+    position:
+      x: -450
+      y: 400
+    connection:
+      latency: 160
+      latencyVariation: 30
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Garage Camera 17'
+    mac: 'b3:50:31:c6:02:11'
+    ip: '192.168.0.18'
+    type: 'iot'
+    position:
+      x: -100
+      y: -320
+    connection:
+      latency: 130
+      latencyVariation: 25
+      bandwidth: 4096
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT RGB Bulb 18'
+    mac: 'b3:50:31:c6:02:12'
+    ip: '192.168.0.19'
+    type: 'iot'
+    position:
+      x: -200
+      y: -270
+    connection:
+      latency: 185
+      latencyVariation: 30
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT LED Strip 19'
+    mac: 'b3:50:31:c6:02:13'
+    ip: '192.168.0.20'
+    type: 'iot'
+    position:
+      x: -300
+      y: -220
+    connection:
+      latency: 185
+      latencyVariation: 30
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Window Sensor 20'
+    mac: 'b3:50:31:c6:02:14'
+    ip: '192.168.0.21'
+    type: 'iot'
+    position:
+      x: -400
+      y: -170
+    connection:
+      latency: 260
+      latencyVariation: 80
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Coffee Maker 21'
+    mac: 'b3:50:31:c6:02:15'
+    ip: '192.168.0.22'
+    type: 'iot'
+    position:
+      x: -100
+      y: -120
+    connection:
+      latency: 200
+      latencyVariation: 40
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Vacuum 22'
+    mac: 'b3:50:31:c6:02:16'
+    ip: '192.168.0.23'
+    type: 'iot'
+    position:
+      x: -200
+      y: -70
+    connection:
+      latency: 240
+      latencyVariation: 60
+      bandwidth: 256
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Purifier 23'
+    mac: 'b3:50:31:c6:02:17'
+    ip: '192.168.0.24'
+    type: 'iot'
+    position:
+      x: -300
+      y: -20
+    connection:
+      latency: 210
+      latencyVariation: 45
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Dehumidifier 24'
+    mac: 'b3:50:31:c6:02:18'
+    ip: '192.168.0.25'
+    type: 'iot'
+    position:
+      x: -400
+      y: 30
+    connection:
+      latency: 215
+      latencyVariation: 45
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Pet Feeder 25'
+    mac: 'b3:50:31:c6:02:19'
+    ip: '192.168.0.26'
+    type: 'iot'
+    position:
+      x: -100
+      y: 80
+    connection:
+      latency: 190
+      latencyVariation: 35
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Pet Water Dispenser 26'
+    mac: 'b3:50:31:c6:02:1A'
+    ip: '192.168.0.27'
+    type: 'iot'
+    position:
+      x: -200
+      y: 130
+    connection:
+      latency: 195
+      latencyVariation: 35
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Baby Monitor 27'
+    mac: 'b3:50:31:c6:02:1B'
+    ip: '192.168.0.28'
+    type: 'iot'
+    position:
+      x: -300
+      y: 180
+    connection:
+      latency: 100
+      latencyVariation: 20
+      bandwidth: 2048
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Living Room Tablet 28'
+    mac: 'b3:50:31:c6:02:1C'
+    ip: '192.168.0.29'
+    type: 'iot'
+    position:
+      x: -400
+      y: 230
+    connection:
+      latency: 80
+      latencyVariation: 20
+      bandwidth: 4096
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Desk Clock 29'
+    mac: 'b3:50:31:c6:02:1D'
+    ip: '192.168.0.30'
+    type: 'iot'
+    position:
+      x: -500
+      y: 280
+    connection:
+      latency: 250
+      latencyVariation: 50
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Smart Scale 30'
+    mac: 'b3:50:31:c6:02:1E'
+    ip: '192.168.0.31'
+    type: 'iot'
+    position:
+      x: -500
+      y: -350
+    connection:
+      latency: 310
+      latencyVariation: 90
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Smart Brush 31'
+    mac: 'b3:50:31:c6:02:1F'
+    ip: '192.168.0.32'
+    type: 'iot'
+    position:
+      x: -500
+      y: -200
+    connection:
+      latency: 320
+      latencyVariation: 100
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Smart Mirror 32'
+    mac: 'b3:50:31:c6:02:20'
+    ip: '192.168.0.33'
+    type: 'iot'
+    position:
+      x: -500
+      y: -50
+    connection:
+      latency: 140
+      latencyVariation: 30
+      bandwidth: 1024
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT CO2 Sensor 33'
+    mac: 'b3:50:31:c6:02:21'
+    ip: '192.168.0.34'
+    type: 'iot'
+    position:
+      x: -500
+      y: 100
+    connection:
+      latency: 280
+      latencyVariation: 70
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Water Valve 34'
+    mac: 'b3:50:31:c6:02:22'
+    ip: '192.168.0.35'
+    type: 'iot'
+    position:
+      x: -500
+      y: 350
+    connection:
+      latency: 170
+      latencyVariation: 40
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'IoT Video Doorbell 35'
+    mac: 'b3:50:31:c6:02:23'
+    ip: '192.168.0.36'
+    type: 'iot'
+    position:
+      x: -50
+      y: 400
+    connection:
+      latency: 110
+      latencyVariation: 25
+      bandwidth: 2048
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Admin PC 01'
+    mac: 'b3:50:31:c6:01:01'
+    ip: '192.168.0.37'
+    type: 'computer'
+    position:
+      x: 600
+      y: -350
+    connection:
+      latency: 10
+      latencyVariation: 2
+      bandwidth: 10000
+      cyberShield:
+        enabled: false
+  - name: 'Development PC 02'
+    mac: 'b3:50:31:c6:01:02'
+    ip: '192.168.0.38'
+    type: 'computer'
+    position:
+      x: 600
+      y: -300
+    connection:
+      latency: 15
+      latencyVariation: 3
+      bandwidth: 8192
+      cyberShield:
+        enabled: false
+  - name: 'Sales PC 03'
+    mac: 'b3:50:31:c6:01:03'
+    ip: '192.168.0.39'
+    type: 'computer'
+    position:
+      x: 600
+      y: -250
+    connection:
+      latency: 20
+      latencyVariation: 5
+      bandwidth: 5120
+      cyberShield:
+        enabled: false
+  - name: 'Marketing PC 04'
+    mac: 'b3:50:31:c6:01:04'
+    ip: '192.168.0.40'
+    type: 'computer'
+    position:
+      x: 600
+      y: -200
+    connection:
+      latency: 25
+      latencyVariation: 5
+      bandwidth: 4096
+      cyberShield:
+        enabled: false
+  - name: 'HR PC 05'
+    mac: 'b3:50:31:c6:01:05'
+    ip: '192.168.0.41'
+    type: 'computer'
+    position:
+      x: 600
+      y: -150
+    connection:
+      latency: 30
+      latencyVariation: 8
+      bandwidth: 2048
+      cyberShield:
+        enabled: false
+  - name: 'CEO Laptop 06'
+    mac: 'b3:50:31:c6:01:06'
+    ip: '192.168.0.42'
+    type: 'computer'
+    position:
+      x: 600
+      y: -100
+    connection:
+      latency: 12
+      latencyVariation: 3
+      bandwidth: 8192
+      cyberShield:
+        enabled: false
+  - name: 'CTO Laptop 07'
+    mac: 'b3:50:31:c6:01:07'
+    ip: '192.168.0.43'
+    type: 'computer'
+    position:
+      x: 600
+      y: -50
+    connection:
+      latency: 12
+      latencyVariation: 3
+      bandwidth: 8192
+      cyberShield:
+        enabled: false
+  - name: 'Data Server 08'
+    mac: 'b3:50:31:c6:01:08'
+    ip: '192.168.0.44'
+    type: 'computer'
+    position:
+      x: 700
+      y: 0
+    connection:
+      latency: 5
+      latencyVariation: 1
+      bandwidth: 10000
+      cyberShield:
+        enabled: false
+  - name: 'Web Server 09'
+    mac: 'b3:50:31:c6:01:09'
+    ip: '192.168.0.45'
+    type: 'computer'
+    position:
+      x: 700
+      y: 50
+    connection:
+      latency: 5
+      latencyVariation: 1
+      bandwidth: 10000
+      cyberShield:
+        enabled: false
+  - name: 'Guest PC 10'
+    mac: 'b3:50:31:c6:01:0A'
+    ip: '192.168.0.46'
+    type: 'computer'
+    position:
+      x: 600
+      y: 100
+    connection:
+      latency: 80
+      latencyVariation: 20
+      bandwidth: 2048
+      cyberShield:
+        enabled: false
+  - name: 'Reception PC 11'
+    mac: 'b3:50:31:c6:01:0B'
+    ip: '192.168.0.47'
+    type: 'computer'
+    position:
+      x: 600
+      y: 150
+    connection:
+      latency: 40
+      latencyVariation: 10
+      bandwidth: 2048
+      cyberShield:
+        enabled: false
+  - name: 'Support PC 12'
+    mac: 'b3:50:31:c6:01:0C'
+    ip: '192.168.0.48'
+    type: 'computer'
+    position:
+      x: 600
+      y: 200
+    connection:
+      latency: 20
+      latencyVariation: 5
+      bandwidth: 4096
+      cyberShield:
+        enabled: false
+  - name: 'Video Workstation 13'
+    mac: 'b3:50:31:c6:01:0D'
+    ip: '192.168.0.49'
+    type: 'computer'
+    position:
+      x: 600
+      y: 250
+    connection:
+      latency: 15
+      latencyVariation: 3
+      bandwidth: 10000
+      cyberShield:
+        enabled: false
+  - name: 'Consultant Laptop 14'
+    mac: 'b3:50:31:c6:01:0E'
+    ip: '192.168.0.50'
+    type: 'computer'
+    position:
+      x: 600
+      y: 300
+    connection:
+      latency: 60
+      latencyVariation: 15
+      bandwidth: 4096
+      cyberShield:
+        enabled: false
+  - name: 'Backup PC 15'
+    mac: 'b3:50:31:c6:01:0F'
+    ip: '192.168.0.51'
+    type: 'computer'
+    position:
+      x: 700
+      y: 350
+    connection:
+      latency: 30
+      latencyVariation: 5
+      bandwidth: 5120
+      cyberShield:
+        enabled: false

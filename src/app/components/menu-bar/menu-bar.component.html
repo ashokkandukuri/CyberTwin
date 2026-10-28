@@ -1,0 +1,277 @@
+<hlm-menubar class="w-fit">
+    <button [hlmMenubarTrigger]="file">
+        {{ "FILE" | translate }}
+    </button>
+    <button [hlmMenubarTrigger]="edit">
+        {{ "EDIT" | translate }}
+    </button>
+    <button [hlmMenubarTrigger]="insert">
+        {{ "INSERT" | translate }}
+    </button>
+    <button [hlmMenubarTrigger]="view">
+        {{ "VIEW" | translate }}
+    </button>
+    <button [hlmMenubarTrigger]="help">
+        {{ "HELP" | translate }}
+    </button>
+</hlm-menubar>
+
+<ng-template #file>
+    <hlm-dropdown-menu sideOffset="1.5" class="w-48">
+        <hlm-dropdown-menu-group>
+            <button hlmDropdownMenuItem (click)="handleOnNewFile()">
+                {{ "NEW_FILE" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘N</hlm-dropdown-menu-shortcut>
+            </button>
+            <button hlmDropdownMenuItem (click)="handleOnOpenFile()">
+                {{ "OPEN" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘O</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            @if (externalLibrary()) {
+                <button
+                    hlmDropdownMenuItem
+                    [hlmDropdownMenuTrigger]="librarySubmenu"
+                    align="start"
+                    side="right">
+                    {{ "EXTERNAL_LIBRARY" | translate }}
+                    <hlm-dropdown-menu-item-sub-indicator />
+                </button>
+            } @else {
+                <button
+                    hlmDropdownMenuItem
+                    (click)="handleOnLoadExternalLibrary()">
+                    {{ "IMPORT_EXTERNAL_LIBRARY" | translate }}
+                </button>
+            }
+            @if (models()) {
+                <button
+                    hlmDropdownMenuItem
+                    [hlmDropdownMenuTrigger]="modelsSubmenu"
+                    align="start"
+                    side="right">
+                    {{ "MODELS" | translate }}
+                    <hlm-dropdown-menu-item-sub-indicator />
+                </button>
+            } @else {
+                <button hlmDropdownMenuItem (click)="handleOnLoadModels()">
+                    {{ "IMPORT_MODELS" | translate }}
+                </button>
+            }
+        </hlm-dropdown-menu-group>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            <button hlmDropdownMenuItem (click)="handleOnSaveFile()">
+                {{ "SAVE" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘S</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #librarySubmenu>
+    <hlm-dropdown-menu-sub>
+        <button hlmDropdownMenuItem (click)="handleOnLoadExternalLibrary()">
+            {{ "IMPORT_EXTERNAL_LIBRARY" | translate }}
+        </button>
+        <button hlmDropdownMenuItem (click)="handleOnDeleteExternalLibrary()">
+            {{ "DELETE_EXTERNAL_LIBRARY" | translate }}
+        </button>
+    </hlm-dropdown-menu-sub>
+</ng-template>
+
+<ng-template #modelsSubmenu>
+    <hlm-dropdown-menu-sub>
+        <button hlmDropdownMenuItem (click)="handleOnLoadModels()">
+            {{ "IMPORT_MODELS" | translate }}
+        </button>
+        <button hlmDropdownMenuItem (click)="handleOnDeleteModels()">
+            {{ "DELETE_MODELS" | translate }}
+        </button>
+    </hlm-dropdown-menu-sub>
+</ng-template>
+
+<ng-template #edit>
+    <hlm-dropdown-menu sideOffset="1.5" class="w-48">
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuItem
+                [disabled]="!canUndo"
+                (click)="handleOnUndo()">
+                {{ "UNDO" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘Z</hlm-dropdown-menu-shortcut>
+            </button>
+            <button
+                hlmDropdownMenuItem
+                [disabled]="!canRedo"
+                (click)="handleOnRedo()">
+                {{ "REDO" | translate }}
+                <hlm-dropdown-menu-shortcut>⇧⌘Z</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #insert>
+    <hlm-dropdown-menu sideOffset="1.5" class="w-48">
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuItem
+                (click)="handleOnInsertRouter()"
+                [disabled]="!canInsertRouter">
+                {{ "ROUTER" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘⇧R</hlm-dropdown-menu-shortcut>
+            </button>
+            <button hlmDropdownMenuItem (click)="handleOnInsertDevice()">
+                {{ "DEVICE" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘⇧D</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #view>
+    <hlm-dropdown-menu sideOffset="1.5" class="w-48">
+        <button
+            inset
+            hlmDropdownMenuItem
+            [hlmDropdownMenuTrigger]="languageSubmenu"
+            align="start"
+            side="right">
+            {{ "LANGUAGE" | translate }}
+            <hlm-dropdown-menu-item-sub-indicator />
+        </button>
+        <hlm-dropdown-menu-separator />
+        <button inset hlmDropdownMenuItem routerLink="/incidents">
+            {{ "SECURITY_INCIDENTS" | translate }}
+            <hlm-dropdown-menu-shortcut>⇧⌘I</hlm-dropdown-menu-shortcut>
+        </button>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuCheckbox
+                [checked]="highContrast()"
+                (click)="handleOnHighContrast()">
+                <hlm-dropdown-menu-checkbox-indicator />
+                {{ "HIGH_CONTRAST" | translate }}
+            </button>
+            <button
+                hlmDropdownMenuCheckbox
+                [checked]="showGrid()"
+                (click)="handleOnGrid()">
+                <hlm-dropdown-menu-checkbox-indicator />
+                {{ "SHOW_GRID" | translate }}
+            </button>
+        </hlm-dropdown-menu-group>
+        <hlm-dropdown-menu-separator />
+        <button inset hlmDropdownMenuItem (click)="handleOnCenter()">
+            {{ "CENTER" | translate }}
+            <hlm-dropdown-menu-shortcut>⌥0</hlm-dropdown-menu-shortcut>
+        </button>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            <button inset hlmDropdownMenuItem (click)="handleOnZoomReset()">
+                {{ "ORIGINAL_ZOOM" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘0</hlm-dropdown-menu-shortcut>
+            </button>
+            <button inset hlmDropdownMenuItem (click)="handleOnZoomIn()">
+                {{ "ZOOM_IN" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘+</hlm-dropdown-menu-shortcut>
+            </button>
+            <button inset hlmDropdownMenuItem (click)="handleOnZoomOut()">
+                {{ "ZOOM_OUT" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘-</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #languageSubmenu>
+    <hlm-dropdown-menu-sub>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'de'"
+            (click)="handleOnLanguage('de')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            Deutsch
+        </button>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'en'"
+            (click)="handleOnLanguage('en')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            English
+        </button>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'es'"
+            (click)="handleOnLanguage('es')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            Español
+        </button>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'fr'"
+            (click)="handleOnLanguage('fr')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            Français
+        </button>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'it'"
+            (click)="handleOnLanguage('it')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            Italiano
+        </button>
+        <button
+            hlmDropdownMenuCheckbox
+            [checked]="language() === 'pt'"
+            (click)="handleOnLanguage('pt')">
+            <hlm-dropdown-menu-checkbox-indicator />
+            Português
+        </button>
+    </hlm-dropdown-menu-sub>
+</ng-template>
+
+<ng-template #help>
+    <hlm-dropdown-menu sideOffset="1.5" class="w-48">
+        <hlm-dropdown-menu-group>
+            <button hlmDropdownMenuItem (click)="handleOnDocumentation()">
+                {{ "DOCUMENTATION" | translate }}
+            </button>
+            <button
+                hlmDropdownMenuItem
+                [hlmDropdownMenuTrigger]="examplesSubmenu"
+                align="start"
+                side="right">
+                {{ "EXAMPLES" | translate }}
+                <hlm-dropdown-menu-item-sub-indicator />
+            </button>
+        </hlm-dropdown-menu-group>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            <button hlmDropdownMenuItem (click)="handleOnSourceCode()">
+                {{ "SOURCE_CODE" | translate }}
+            </button>
+            <button hlmDropdownMenuItem disabled>
+                {{ versionName }}
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #examplesSubmenu>
+    <hlm-dropdown-menu-sub>
+        <button hlmDropdownMenuItem (click)="handleOnLayoutExamples()">
+            {{ "TOPOLOGY_EXAMPLES" | translate }}
+        </button>
+        <button hlmDropdownMenuItem (click)="handleOnLibraryExamples()">
+            {{ "LIBRARY_EXAMPLES" | translate }}
+        </button>
+        <button hlmDropdownMenuItem (click)="handleOnModelsExamples()">
+            {{ "MODELS_EXAMPLES" | translate }}
+        </button>
+    </hlm-dropdown-menu-sub>
+</ng-template>

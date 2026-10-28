@@ -1,0 +1,62 @@
+exportedAt: "2025-05-24T11:01:13.304Z"
+router:
+    name: "Router"
+    mac: "7e:eb:8b:83:80:be"
+    ip: "192.168.0.1"
+    position:
+        x: 0
+        y: 0
+devices:
+    - name: "T"
+      mac: "b3:50:31:c6:32:9a"
+      ip: "192.168.0.2"
+      type: "iot"
+      position:
+          x: -160
+          y: 0
+      connection:
+          latency: 211
+          latencyVariation: 80
+          bandwidth: 512
+          cyberShield:
+              enabled: true
+              model: "aprendizaje_federado"
+    - name: "E"
+      mac: "48:90:2d:6d:f6:4a"
+      ip: "192.168.0.5"
+      type: "computer"
+      position:
+          x: 160
+          y: 160
+      connection:
+          latency: 412
+          latencyVariation: 20
+          bandwidth: 1024
+          cyberShield:
+              enabled: false
+    - name: "D"
+      mac: "11:20:47:8a:6c:c4"
+      ip: "192.168.0.4"
+      type: "computer"
+      position:
+          x: 160
+          y: 0
+      connection:
+          latency: 210
+          latencyVariation: 50
+          bandwidth: 1024
+          cyberShield:
+              enabled: false
+    - name: "Y"
+      mac: "ad:96:65:97:a8:bd"
+      ip: "192.168.0.3"
+      type: "computer"
+      position:
+          x: 160
+          y: -160
+      connection:
+          latency: 352
+          latencyVariation: 40
+          bandwidth: 1024
+          cyberShield:
+              enabled: false

@@ -1,0 +1,370 @@
+<div class="flex h-full w-full max-w-7xl mx-auto bg-background/95 backdrop-blur rounded-xl border shadow-lg overflow-hidden flex-col md:flex-row gap-0">
+    <!-- Header for Mobile only -->
+    <div class="md:hidden border-b p-4 flex items-center justify-between">
+        <h2 class="text-lg font-semibold tracking-tight">{{ "SECURITY_INCIDENTS" | translate }}</h2>
+        <button routerLink="/" class="text-muted-foreground hover:text-foreground">
+            <ng-icon name="lucideGhost" size="1.25rem" />
+        </button>
+    </div>
+
+    <!-- Left Column: Incident List -->
+    <div class="w-full md:w-1/3 lg:w-1/4 border-b md:border-b-0 md:border-r flex flex-col h-full bg-card">
+        <!-- List Header -->
+        <div class="p-4 border-b flex flex-col gap-3 shrink-0 bg-background/50">
+            <div class="hidden md:flex items-center justify-between">
+                <h2 class="text-lg font-semibold tracking-tight flex items-center gap-2">
+                    <ng-icon name="lucideShieldAlert" class="text-destructive" size="1.25rem" />
+                    {{ "SECURITY_INCIDENTS" | translate }}
+                </h2>
+                <button routerLink="/" class="text-muted-foreground hover:text-foreground p-1 rounded-sm">
+                    <ng-icon name="lucideGhost" size="1rem" />
+                </button>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button hlmBtn size="sm" variant="outline" [class.bg-accent]="filterStatus() === 'ALL'" (click)="setFilter('ALL')">
+                    {{ "ALL" | translate }}
+                </button>
+                <button hlmBtn size="sm" variant="outline" [class.bg-accent]="filterStatus() === 'ACTIVE'" (click)="setFilter('ACTIVE')">
+                    {{ "ACTIVE" | translate }}
+                </button>
+                <button hlmBtn size="sm" variant="outline" [class.bg-accent]="filterStatus() === IncidentStatus.RECOVERED" (click)="setFilter(IncidentStatus.RECOVERED)">
+                    {{ "RECOVERED" | translate }}
+                </button>
+                <button hlmBtn size="sm" variant="outline" [class.bg-accent]="filterStatus() === 'CRITICAL_HIGH'" (click)="setFilter('CRITICAL_HIGH')">
+                    {{ "CRITICAL_HIGH" | translate }}
+                </button>
+            </div>
+        </div>
+
+        <!-- List Body -->
+        <div class="flex-1 overflow-y-auto">
+            <div class="flex flex-col p-2 gap-2">
+                @if (filteredIncidents().length === 0) {
+                    <div class="p-8 text-center text-muted-foreground text-sm flex flex-col items-center gap-2">
+                        <ng-icon name="lucideShieldCheck" size="2rem" class="opacity-50" />
+                        {{ "NO_INCIDENTS_RECORDED" | translate }}
+                    </div>
+                }
+                @for (incident of filteredIncidents(); track incident.id) {
+                    <button 
+                        class="flex flex-col text-left p-3 rounded-lg transition-colors border hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
+                        [class.bg-accent]="selectedIncidentId() === incident.id"
+                        [class.border-border]="selectedIncidentId() !== incident.id"
+                        [class.border-primary]="selectedIncidentId() === incident.id"
+                        (click)="selectIncident(incident.id)">
+                        <div class="flex justify-between items-start w-full mb-1">
+                            <span class="text-xs font-mono text-muted-foreground">{{ incident.id }}</span>
+                            <span hlmBadge [variant]="getStatusVariant(incident.status)" class="text-[0.65rem] px-1.5 py-0 uppercase leading-none h-4">
+                                {{ incident.status | translate }}
+                            </span>
+                        </div>
+                        <div class="font-medium text-sm truncate w-full mb-1">{{ incident.title }}</div>
+                        <div class="text-xs text-muted-foreground truncate w-full flex items-center gap-1 mb-2">
+                            <ng-icon name="lucideGhost" size="0.7rem" />
+                            {{ incident.twinId }}
+                        </div>
+                        <div class="flex gap-2">
+                            @if (incident.peakRiskLevel) {
+                                <span hlmBadge [variant]="getLevelVariant(incident.peakRiskLevel)" class="text-[0.6rem] px-1 py-0 uppercase h-3.5 opacity-80">
+                                    {{ "RISK" | translate }}: {{ incident.peakRiskLevel }}
+                                </span>
+                            }
+                            @if (incident.peakImpactLevel) {
+                                <span hlmBadge [variant]="getLevelVariant(incident.peakImpactLevel)" class="text-[0.6rem] px-1 py-0 uppercase h-3.5 opacity-80">
+                                    {{ "IMPACT" | translate }}: {{ incident.peakImpactLevel }}
+                                </span>
+                            }
+                        </div>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Investigation Details -->
+    <div class="w-full md:w-2/3 lg:w-3/4 flex flex-col h-full bg-background relative">
+        @if (selectedIncident(); as incident) {
+            <div class="flex-1 overflow-y-auto relative">
+                <div class="p-6 md:p-8 flex flex-col gap-8 max-w-4xl mx-auto">
+                    
+                    <!-- Overview Header -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-start justify-between gap-4 flex-wrap">
+                            <div>
+                                <h1 class="text-2xl font-bold tracking-tight mb-1">{{ incident.title }}</h1>
+                                <div class="flex items-center gap-3 text-sm text-muted-foreground font-mono">
+                                    <span>{{ incident.id }}</span>
+                                    <span>•</span>
+                                    <a [routerLink]="['/', incident.twinId, 'digital-twin']" class="hover:text-primary transition-colors flex items-center gap-1">
+                                        <ng-icon name="lucideGhost" size="0.875rem" />
+                                        {{ incident.twinId }}
+                                    </a>
+                                </div>
+                            </div>
+                            <span hlmBadge [variant]="getStatusVariant(incident.status)" class="text-xs px-2 py-0.5 uppercase">
+                                {{ incident.status | translate }}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-muted/30 p-4 rounded-lg border">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-muted-foreground uppercase tracking-wider">{{ "CREATED" | translate }}</span>
+                                <span class="text-sm font-medium tabular-nums">{{ incident.createdAt | date:'HH:mm:ss.SSS' }}</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-muted-foreground uppercase tracking-wider">{{ "UPDATED" | translate }}</span>
+                                <span class="text-sm font-medium tabular-nums">{{ incident.updatedAt | date:'HH:mm:ss.SSS' }}</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-muted-foreground uppercase tracking-wider">{{ "PEAK_RISK" | translate }}</span>
+                                <div>
+                                    <span hlmBadge [variant]="getLevelVariant(incident.peakRiskLevel)" class="text-[0.7rem] px-1.5 py-0 uppercase">
+                                        {{ incident.peakRiskLevel || ('EVIDENCE_NOT_AVAILABLE' | translate) }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-muted-foreground uppercase tracking-wider">{{ "PEAK_IMPACT" | translate }}</span>
+                                <div>
+                                    <span hlmBadge [variant]="getLevelVariant(incident.peakImpactLevel)" class="text-[0.7rem] px-1.5 py-0 uppercase">
+                                        {{ incident.peakImpactLevel || ('EVIDENCE_NOT_AVAILABLE' | translate) }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compact incident lifecycle progress -->
+                    <section
+                        aria-label="Incident lifecycle"
+                        class="rounded-lg border bg-card/40 p-4">
+                        <h3 class="mb-3 text-xs font-semibold tracking-wider text-muted-foreground">
+                            INCIDENT LIFECYCLE
+                        </h3>
+                        <div
+                            role="list"
+                            aria-label="Investigating, Mitigated, Recovered"
+                            class="grid grid-cols-1 items-center gap-y-1 sm:grid-cols-[minmax(0,1fr)_2.5rem_minmax(0,1fr)_2.5rem_minmax(0,1fr)] sm:gap-y-0">
+                            @for (step of lifecycleSteps; track step.id; let index = $index) {
+                                @if (index > 0) {
+                                    <div
+                                        aria-hidden="true"
+                                        class="hidden items-center gap-0.5 text-muted-foreground sm:flex"
+                                        [class.text-emerald-500]="isLifecycleConnectorComplete(index)">
+                                        <span class="h-px flex-1 bg-border" [class.bg-emerald-500]="isLifecycleConnectorComplete(index)"></span>
+                                        <span class="text-base leading-none">→</span>
+                                    </div>
+                                    <div
+                                        aria-hidden="true"
+                                        class="flex h-5 items-center justify-center text-muted-foreground sm:hidden"
+                                        [class.text-emerald-500]="isLifecycleConnectorComplete(index)">
+                                        <span class="text-base leading-none">↓</span>
+                                    </div>
+                                }
+                                <div
+                                    role="listitem"
+                                    class="min-w-0 rounded-md border p-3 transition-colors"
+                                    [attr.aria-current]="lifecycleState(step.id) === 'active' ? 'step' : null"
+                                    [ngClass]="{
+                                        'border-primary bg-primary/10': lifecycleState(step.id) === 'active',
+                                        'border-emerald-500/40 bg-emerald-500/10': lifecycleState(step.id) === 'completed',
+                                        'border-border bg-muted/20 text-muted-foreground opacity-60': lifecycleState(step.id) === 'pending'
+                                    }">
+                                    <div class="flex items-start gap-2.5">
+                                        <ng-icon
+                                            size="1rem"
+                                            class="mt-0.5 shrink-0"
+                                            [class.text-primary]="lifecycleState(step.id) === 'active'"
+                                            [class.text-emerald-500]="lifecycleState(step.id) === 'completed'"
+                                            [class.text-muted-foreground]="lifecycleState(step.id) === 'pending'"
+                                            [name]="step.icon === 'activity' ? 'lucideActivity' : step.icon === 'shield' ? 'lucideShield' : 'lucideShieldCheck'" />
+                                        <div class="min-w-0">
+                                            <div class="text-xs font-semibold tracking-wide">{{ step.title }}</div>
+                                            <p class="mt-1 text-xs leading-snug text-muted-foreground">{{ step.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </section>
+
+                    <!-- Explanation Blocks -->
+                    @if (currentExplanation(); as exp) {
+                        <div class="flex flex-col gap-6">
+                            <h3 class="text-lg font-semibold flex items-center gap-2 border-b pb-2">
+                                <ng-icon name="lucideInfo" size="1.125rem" />
+                                {{ "EXPLANATION" | translate }}
+                            </h3>
+                            
+                            <p class="text-sm leading-relaxed bg-accent/30 p-4 rounded-md border-l-4 border-l-primary/50">
+                                {{ exp.summary }}
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideActivity" size="1rem" />
+                                        {{ "DETECTION" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.detectionExplanation }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideGhost" size="1rem" />
+                                        {{ "ATTACK" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.attackExplanation }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideAlertTriangle" size="1rem" class="text-destructive" />
+                                        {{ "RISK" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.riskExplanation }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideAlertTriangle" size="1rem" class="text-orange-500" />
+                                        {{ "IMPACT" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.impactExplanation }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideShield" size="1rem" class="text-blue-500" />
+                                        {{ "MITIGATION" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.mitigationExplanation }}</p>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <span class="text-sm font-medium text-muted-foreground flex items-center gap-1.5">
+                                        <ng-icon name="lucideShieldCheck" size="1rem" class="text-green-500" />
+                                        {{ "RECOVERY" | translate }}
+                                    </span>
+                                    <p class="text-sm leading-relaxed">{{ exp.recoveryExplanation }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Evidence List -->
+                    <div class="flex flex-col gap-6">
+                        <h3 class="text-lg font-semibold flex items-center gap-2 border-b pb-2">
+                            <ng-icon name="lucideList" size="1.125rem" />
+                            {{ "EVIDENCE" | translate }}
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            @for (ev of selectedEvidence(); track ev.id) {
+                                <div class="flex flex-col gap-1 p-3 rounded-md border bg-card text-card-foreground shadow-xs">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{{ ev.category | translate }}</span>
+                                        <span class="text-[0.65rem] tabular-nums text-muted-foreground">{{ ev.timestamp | date:'HH:mm:ss.SSS' }}</span>
+                                    </div>
+                                    <div class="text-sm">
+                                        @switch(ev.category) {
+                                            @case(EvidenceCategory.ANOMALY) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "SEVERITY" | translate }}:</span>{{ ev.anomalySeverity }}</div>
+                                                    @if (ev.anomalyScore !== undefined) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "SCORE" | translate }}:</span>{{ ev.anomalyScore | number:'1.2-2' }}</div>
+                                                    }
+                                                    @if (ev.contributingFeatures && ev.contributingFeatures.length) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "CONTRIBUTING_FEATURES" | translate }}:</span>{{ ev.contributingFeatures.join(', ') }}</div>
+                                                    }
+                                                </div>
+                                            }
+                                            @case(EvidenceCategory.RISK) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "LEVEL" | translate }}:</span><span [class.text-destructive]="ev.riskLevel === RiskLevel.CRITICAL || ev.riskLevel === RiskLevel.HIGH">{{ ev.riskLevel }}</span></div>
+                                                    @if (ev.riskScore !== undefined) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "SCORE" | translate }}:</span>{{ ev.riskScore | number:'1.2-2' }}</div>
+                                                    }
+                                                    @if (ev.riskFactors && ev.riskFactors.length) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "FACTORS" | translate }}:</span>{{ ev.riskFactors.join(', ') }}</div>
+                                                    }
+                                                </div>
+                                            }
+                                            @case(EvidenceCategory.IMPACT) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "LEVEL" | translate }}:</span><span [class.text-orange-500]="ev.impactLevel === ImpactLevel.CRITICAL || ev.impactLevel === ImpactLevel.HIGH">{{ ev.impactLevel }}</span></div>
+                                                    @if (ev.impactScore !== undefined) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "SCORE" | translate }}:</span>{{ ev.impactScore | number:'1.2-2' }}</div>
+                                                    }
+                                                    @if (ev.impactDimensions && ev.impactDimensions.length) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "DIMENSIONS" | translate }}:</span>{{ ev.impactDimensions.join(', ') }}</div>
+                                                    }
+                                                </div>
+                                            }
+                                            @case(EvidenceCategory.ATTACK) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "TYPE" | translate }}:</span><span class="uppercase">{{ "SIMULATED" | translate }} {{ ev.attackType }}</span></div>
+                                                    @if (ev.attackIntensity !== undefined) {
+                                                        <div><span class="text-muted-foreground mr-1">{{ "INTENSITY" | translate }}:</span>{{ ev.attackIntensity | number:'1.2-2' }}</div>
+                                                    }
+                                                </div>
+                                            }
+                                            @case(EvidenceCategory.MITIGATION) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "TYPE" | translate }}:</span>{{ ev.mitigationType }}</div>
+                                                    <div><span class="text-muted-foreground mr-1">{{ "STATUS" | translate }}:</span>{{ ev.mitigationStatus }}</div>
+                                                </div>
+                                            }
+                                            @case(EvidenceCategory.RECOVERY) {
+                                                <div class="flex flex-col gap-1">
+                                                    <div><span class="text-muted-foreground mr-1">{{ "STATUS" | translate }}:</span>{{ ev.description }}</div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            @if (selectedEvidence().length === 0) {
+                                <div class="text-sm text-muted-foreground col-span-full italic">
+                                    {{ "EVIDENCE_NOT_AVAILABLE" | translate }}
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="flex flex-col gap-6">
+                        <h3 class="text-lg font-semibold flex items-center gap-2 border-b pb-2">
+                            <ng-icon name="lucideClock" size="1.125rem" />
+                            {{ "TIMELINE" | translate }}
+                        </h3>
+                        
+                        <div class="relative border-l border-muted-foreground/30 ml-3 pl-6 py-2 flex flex-col gap-4">
+                            @for (entry of selectedTimeline(); track entry.id) {
+                                <div class="relative">
+                                    <div class="absolute -left-[29px] top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-background"></div>
+                                    <div class="flex flex-col gap-0.5">
+                                        <div class="flex items-baseline gap-2">
+                                            <span class="text-xs font-mono text-muted-foreground tabular-nums">{{ entry.timestamp | date:'HH:mm:ss.SSS' }}</span>
+                                        </div>
+                                        <div class="text-sm font-medium">{{ entry.title }}</div>
+                                        <div class="text-sm text-muted-foreground mt-1">{{ entry.summary }}</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (selectedTimeline().length === 0) {
+                                <div class="text-sm text-muted-foreground italic">
+                                    {{ "EVIDENCE_NOT_AVAILABLE" | translate }}
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        } @else {
+            <div class="flex-1 flex flex-col items-center justify-center text-muted-foreground gap-4 p-8">
+                <ng-icon name="lucideShieldCheck" size="4rem" class="opacity-20" />
+                <p class="text-lg">{{ "NO_INCIDENTS_RECORDED" | translate }}</p>
+                <p class="text-sm opacity-70 text-center max-w-sm">
+                    Select an incident from the list to view its investigation details, evidence, and chronological timeline.
+                </p>
+            </div>
+        }
+    </div>
+</div>

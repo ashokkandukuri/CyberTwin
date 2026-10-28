@@ -1,0 +1,40 @@
+<div
+    hlmCard
+    class="node"
+    [ngClass]="{
+        focused: focused(),
+        dragging,
+        communicating: node().communicating,
+    }"
+    [ngStyle]="{
+        left: 'calc(50% + ' + node().position.x + 'px)',
+        top: 'calc(50% - ' + node().position.y + 'px)',
+    }">
+    @switch (node().type) {
+        @case (NodeType.ROUTER) {
+            <ng-icon name="lucideRouter" size="24" />
+        }
+        @case (NodeType.IOT) {
+            <ng-icon name="lucideCpu" size="24" />
+        }
+        @case (NodeType.COMPUTER) {
+            <ng-icon name="lucideLaptop" size="24" />
+            <ng-icon name="lucideGhost" size="1rem" class="phantom-attacker" />
+        }
+    }
+</div>
+<div
+    class="node-info"
+    [ngClass]="{
+        dragging,
+        communicating: node().communicating,
+    }"
+    [ngStyle]="{
+        left: 'calc(50% + ' + node().position.x + 'px)',
+        top: 'calc(50% - ' + node().position.y + 'px)',
+    }">
+    <span class="name text-lg font-bold">{{ node().name }}</span>
+    <span class="ip text-muted-foreground text-sm opacity-60">{{
+        node().ip
+    }}</span>
+</div>

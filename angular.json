@@ -1,0 +1,85 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "iot-sim": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:application",
+                    "options": {
+                        "outputPath": "dist",
+                        "index": "src/index.html",
+                        "browser": "src/main.ts",
+                        "polyfills": ["zone.js"],
+                        "tsConfig": "tsconfig.app.json",
+                        "assets": [
+                            {
+                                "glob": "**/*",
+                                "input": "public"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "src/app/assets",
+                                "output": "/assets"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "resources",
+                                "output": "/resources"
+                            }
+                        ],
+                        "styles": ["src/styles.css"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2MB",
+                                    "maximumError": "3MB"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "4kB",
+                                    "maximumError": "8kB"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "sourceMap": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "iot-sim:build:production"
+                        },
+                        "development": {
+                            "buildTarget": "iot-sim:build:development"
+                        }
+                    },
+                    "defaultConfiguration": "development"
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n"
+                }
+            }
+        }
+    },
+    "cli": {
+      "analytics": "b142bd17-6f3b-4a81-a4cd-43ff3d4bccc5"
+    }
+}

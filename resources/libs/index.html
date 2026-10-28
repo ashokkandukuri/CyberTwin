@@ -1,0 +1,25 @@
+---
+layout: default
+title: Commands & Attacks Library
+---
+
+<h1>Commands & Attacks Library</h1>
+<p>
+    This directory contains <i>.js</i> files that define custom libraries that can be
+    used in the simulator. These libraries allow users to execute commands,
+    launch attacks, and intercept packets in the simulated network.
+</p>
+
+<ul>
+    {% for file in site.static_files %} {% if file.path contains
+    'resources/libs/' and file.extname == '.js' %}
+    <li>
+        <strong>{{ file.name }}</strong>
+        <br />
+        <a href="{{ site.baseurl }}{{ file.path }}" download>[Download JS]</a>
+    </li>
+    {% endif %} {% endfor %}
+</ul>
+
+<hr />
+<a href="{{ site.baseurl }}/resources">← Back to Resources</a>

@@ -1,0 +1,25 @@
+---
+layout: default
+title: AI Detection Model
+---
+
+<h1>AI Detection Model</h1>
+<p>
+    This directory contains <i>.zip</i> files that include the artificial
+    intelligence models that can be used in the simulator. These models enable
+    the detection of attacks in the simulated network.
+</p>
+
+<ul>
+    {% for file in site.static_files %} {% if file.path contains
+    'resources/models/' and file.extname == '.zip' %}
+    <li>
+        <strong>{{ file.name }}</strong>
+        <br />
+        <a href="{{ site.baseurl }}{{ file.path }}" download>[Download ZIP]</a>
+    </li>
+    {% endif %} {% endfor %}
+</ul>
+
+<hr />
+<a href="{{ site.baseurl }}/resources">← Back to Resources</a>

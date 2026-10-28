@@ -1,0 +1,109 @@
+<app-menu-bar
+    (onNewFile)="onNewFile()"
+    (onOpenFile)="onOpenFile()"
+    [externalLibrary]="library.library !== undefined"
+    (onLoadExternalLibrary)="onLoadExternalLibrary()"
+    (onDeleteExternalLibrary)="onDeleteExternalLibrary()"
+    [models]="model.models !== undefined"
+    (onLoadModels)="onLoadModels()"
+    (onDeleteModels)="onDeleteModels()"
+    (onSaveFile)="onSaveFile()"
+    (onUndo)="onUndo()"
+    (onRedo)="onRedo()"
+    (onInsertRouter)="onInsertNode(NodeType.RouterTypes)"
+    (onInsertDevice)="onInsertNode(NodeType.DeviceTypes)"
+    [language]="config.language()"
+    (onChangeLanguage)="onChangeLanguage($event)"
+    [highContrast]="config.highContrast()"
+    (onHighContrast)="onHighContrast()"
+    [showGrid]="config.grid()"
+    (onShowGrid)="onShowGrid()"
+    (onCenter)="onCenter('smooth')"
+    (onZoomReset)="onZoomReset()"
+    (onZoomIn)="onZoomIn()"
+    (onZoomOut)="onZoomOut()"
+    class="fixed top-5 left-5 z-90" />
+<div [@floatAnimation]="getAnimationData(outlet)" class="relative z-90">
+    <router-outlet #outlet="outlet" />
+</div>
+<hlm-toaster richColors theme="system" />
+<app-canvas #canvas [hlmContextMenuTrigger]="canvasContextMenu" align="start">
+    @for (node of nodes; track node.mac) {
+        <app-node
+            [node]="node"
+            [hlmContextMenuTrigger]="nodeContextMenu"
+            [hlmContextMenuTriggerData]="{ $implicit: node }" />
+    }
+    @for (
+        connection of connections;
+        track `${connection.node1.mac}::${connection.node2.mac}`
+    ) {
+        <app-connection [connection]="connection" />
+    }
+</app-canvas>
+
+<ng-template #canvasContextMenu>
+    <hlm-dropdown-menu class="w-64">
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuItem
+                [disabled]="!!router"
+                (click)="onInsertNode(NodeType.RouterTypes, $event)">
+                {{ "INSERT_ROUTER" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘⇧R</hlm-dropdown-menu-shortcut>
+            </button>
+            <button
+                hlmDropdownMenuItem
+                (click)="onInsertNode(NodeType.DeviceTypes, $event)">
+                {{ "INSERT_DEVICE" | translate }}
+                <hlm-dropdown-menu-shortcut>⌘⇧D</hlm-dropdown-menu-shortcut>
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>
+
+<ng-template #nodeContextMenu let-item>
+    <hlm-dropdown-menu class="w-64">
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuItem
+                (click)="onNodeTraffic(item.mac, $event)">
+                <ng-icon
+                    hlmMenuIcon
+                    name="lucideChevronsLeftRightEllipsis"
+                    class="text-current!" />
+                {{ "NETWORK_TRAFFIC" | translate }}
+            </button>
+            @if (NodeType.AttackerTypes.includes(item.type)) {
+                <button
+                    hlmDropdownMenuItem
+                    (click)="onNodeAttack(item.mac, $event)">
+                    <ng-icon
+                        hlmMenuIcon
+                        name="lucideGhost"
+                        class="text-current!" />
+                    {{ "PHANTOM_ATTACKER" | translate }}
+                </button>
+            }
+            <button
+                hlmDropdownMenuItem
+                (click)="onNodeConfig(item.mac, $event)">
+                <ng-icon
+                    hlmMenuIcon
+                    name="lucideSettings"
+                    class="text-current!" />
+                {{ "CONFIGURATION" | translate }}
+            </button>
+        </hlm-dropdown-menu-group>
+        <hlm-dropdown-menu-separator />
+        <hlm-dropdown-menu-group>
+            <button
+                hlmDropdownMenuItem
+                (click)="onDeleteNode(item.mac, $event)"
+                class="text-red-500 hover:bg-red-50 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-950 dark:hover:text-red-300">
+                <ng-icon hlmMenuIcon name="lucideTrash" class="text-current!" />
+                {{ "DELETE" | translate }}
+            </button>
+        </hlm-dropdown-menu-group>
+    </hlm-dropdown-menu>
+</ng-template>

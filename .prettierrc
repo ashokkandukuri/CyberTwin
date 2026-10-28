@@ -1,0 +1,11 @@
+{
+    "cssDeclarationSorter": "concentric-css",
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-css-order",
+        "prettier-plugin-tailwindcss"
+    ],
+    "tabWidth": 4,
+    "useTabs": false,
+    "bracketSameLine": true
+}

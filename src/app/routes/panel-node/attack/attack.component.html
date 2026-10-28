@@ -1,0 +1,69 @@
+@if (node().connected) {
+    <label hlmLabel class="flex-col items-start justify-start">
+        {{ "ATTACK" | translate }}
+        <brn-select
+            [(ngModel)]="attack"
+            (ngModelChange)="rememberAttackSelection($event)"
+            [placeholder]="'SELECT_ATTACK' | translate"
+            scrollable="true"
+            class="inline-block w-full">
+            <hlm-select-trigger class="w-full">
+                <hlm-select-value class="block" />
+            </hlm-select-trigger>
+            <hlm-select-content class="max-h-96">
+                <hlm-select-scroll-up />
+                @for (item of attacks; track $index) {
+                    @if (item === "---") {
+                        <hlm-dropdown-menu-separator />
+                    } @else {
+                        <hlm-option [value]="item">{{ item.name }}</hlm-option>
+                    }
+                } @empty {
+                    <hlm-option disabled class="px-2">
+                        {{ "NO_ATTACKS" | translate }}
+                    </hlm-option>
+                }
+                <hlm-select-scroll-down />
+            </hlm-select-content>
+        </brn-select>
+    </label>
+    <label hlmLabel class="flex-col items-start justify-start">
+        {{ (multipleTargets() ? "TARGETS" : "TARGET") | translate }}
+        <brn-select
+            [(ngModel)]="target"
+            (ngModelChange)="rememberTargetSelection($event)"
+            [placeholder]="
+                (multipleTargets() ? 'TARGETS_IP' : 'TARGET_IP') | translate
+            "
+            [multiple]="multipleTargets()"
+            scrollable="true"
+            class="inline-block w-full">
+            <hlm-select-trigger class="w-full">
+                <hlm-select-value class="block" />
+            </hlm-select-trigger>
+            <hlm-select-content class="max-h-96">
+                <hlm-select-scroll-up />
+                @for (item of connectedNodes; track $index) {
+                    <hlm-option [value]="item.ip">{{ item.ip }}</hlm-option>
+                }
+                <hlm-select-scroll-down />
+            </hlm-select-content>
+        </brn-select>
+    </label>
+    <button hlmBtn [disabled]="!(attack() && target())" (click)="execute()">
+        {{ "LAUNCH_ATTACK" | translate }}
+    </button>
+} @else {
+    <ng-icon
+        name="lucideUnplug"
+        size="6rem"
+        class="text-secondary! mt-4 mb-8 self-center" />
+    <p class="text-muted-foreground w-96 self-center text-center text-sm">
+        {{ "ATTACKER_NOT_CONNECTED" | translate }}
+    </p>
+    @if (canConnect) {
+        <button hlmBtn class="self-center" (click)="connect()">
+            {{ "CONNECT" | translate }}
+        </button>
+    }
+}

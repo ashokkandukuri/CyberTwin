@@ -1,0 +1,148 @@
+exportedAt: '2026-01-08T08:14:49.063Z'
+router:
+  name: 'Main Router'
+  mac: '7e:eb:8b:83:80:be'
+  ip: '192.168.0.1'
+  position:
+    x: 0
+    y: 0
+devices:
+  - name: 'Temperature Sensor'
+    mac: 'b3:50:31:c6:02:01'
+    ip: '192.168.0.2'
+    type: 'iot'
+    position:
+      x: -340
+      y: -300
+    connection:
+      latency: 211
+      latencyVariation: 80
+      bandwidth: 256
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Security Camera'
+    mac: 'b3:50:31:c6:02:02'
+    ip: '192.168.0.3'
+    type: 'iot'
+    position:
+      x: -240
+      y: 80
+    connection:
+      latency: 150
+      latencyVariation: 20
+      bandwidth: 4096
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Wifi Printer'
+    mac: 'b3:50:31:c6:02:03'
+    ip: '192.168.0.4'
+    type: 'iot'
+    position:
+      x: -140
+      y: 280
+    connection:
+      latency: 90
+      latencyVariation: 15
+      bandwidth: 512
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Living Room Smart TV'
+    mac: 'b3:50:31:c6:02:04'
+    ip: '192.168.0.5'
+    type: 'iot'
+    position:
+      x: 280
+      y: -360
+    connection:
+      latency: 45
+      latencyVariation: 10
+      bandwidth: 8192
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Smart Thermostat'
+    mac: 'b3:50:31:c6:02:05'
+    ip: '192.168.0.6'
+    type: 'iot'
+    position:
+      x: -160
+      y: -260
+    connection:
+      latency: 250
+      latencyVariation: 90
+      bandwidth: 128
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Hallway Light'
+    mac: 'b3:50:31:c6:02:06'
+    ip: '192.168.0.7'
+    type: 'iot'
+    position:
+      x: -360
+      y: -20
+    connection:
+      latency: 190
+      latencyVariation: 30
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'Kitchen Light'
+    mac: 'b3:50:31:c6:02:07'
+    ip: '192.168.0.8'
+    type: 'iot'
+    position:
+      x: 20
+      y: 200
+    connection:
+      latency: 195
+      latencyVariation: 35
+      bandwidth: 64
+      cyberShield:
+        enabled: true
+        model: 'perceptrón_multicapa'
+  - name: 'File Server'
+    mac: 'b3:50:31:c6:01:01'
+    ip: '192.168.0.16'
+    type: 'computer'
+    position:
+      x: 640
+      y: 200
+    connection:
+      latency: 5
+      latencyVariation: 1
+      bandwidth: 10000
+      cyberShield:
+        enabled: false
+        model: 'perceptrón_multicapa'
+  - name: 'Developer PC'
+    mac: 'b3:50:31:c6:01:02'
+    ip: '192.168.0.17'
+    type: 'computer'
+    position:
+      x: 640
+      y: 100
+    connection:
+      latency: 15
+      latencyVariation: 5
+      bandwidth: 5120
+      cyberShield:
+        enabled: false
+  - name: 'Admin Laptop'
+    mac: 'b3:50:31:c6:01:03'
+    ip: '192.168.0.18'
+    type: 'computer'
+    position:
+      x: 640
+      y: -0.0
+    connection:
+      latency: 25
+      latencyVariation: 10
+      bandwidth: 2048
+      cyberShield:
+        enabled: false
+        model: 'perceptrón_multicapa'

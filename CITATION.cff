@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Diez Bermejo"
+    given-names: "Alejandro"
+    orcid: "https://orcid.org/0009-0003-2118-3977"
+  - family-names: "Martinez Gonzalez"
+    given-names: "Branly"
+    orcid: "https://orcid.org/0009-0002-3224-7131"
+  - family-names: "Gil-Arroyo"
+    given-names: "Beatriz"
+    orcid: "https://orcid.org/0009-0009-8499-093X"
+  - family-names: "Rincón Arango"
+    given-names: "Jaime"
+    orcid: "https://orcid.org/0000-0003-1153-0616"
+  - family-names: "Urda Muñoz"
+    given-names: "Daniel"
+    orcid: "https://orcid.org/0000-0003-2662-798X"
+title: "IoT-Sim: An interactive platform for designing and securing smart device networks"
+version: 1.0.5
+doi: 10.1016/j.softx.2026.102527
+date-released: 2026-01-29
+url: "https://www.sciencedirect.com/science/article/pii/S235271102600021X"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Diez Bermejo"
+      given-names: "Alejandro"
+    - family-names: "Martinez Gonzalez"
+      given-names: "Branly"
+    - family-names: "Gil-Arroyo"
+      given-names: "Beatriz"
+    - family-names: "Rincón Arango"
+      given-names: "Jaime"
+    - family-names: "Urda Muñoz"
+      given-names: "Daniel"
+  doi: "10.1016/j.softx.2026.102527"
+  journal: "SoftwareX"
+  month: 1
+  start: 102527
+  title: "IoT-Sim: An interactive platform for designing and securing smart device networks"
+  volume: 33
+  year: 2026

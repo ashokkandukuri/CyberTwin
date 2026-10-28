@@ -1,0 +1,203 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "outDir": "./dist/out-tsc",
+        "strict": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "bundler",
+        "importHelpers": true,
+        "target": "ES2022",
+        "module": "ES2022",
+        "paths": {
+            "@assets/*": ["./src/app/assets/*"],
+            "@components/*": ["./src/app/components/*"],
+            "@guards/*": ["./src/app/guards/*"],
+            "@models/*": ["./src/app/models/*"],
+            "@pipes/*": ["./src/app/pipes/*"],
+            "@routes/*": ["./src/app/routes/*"],
+            "@services/*": ["./src/app/services/*"],
+            "@utils/*": ["./src/app/utils/*"],
+            "@spartan-ng/helm/accordion": [
+                "./src/app/components/ui/accordion/src/index.ts"
+            ],
+            "@spartan-ng/helm/alert": [
+                "./src/app/components/ui/alert/src/index.ts"
+            ],
+            "@spartan-ng/helm/alert-dialog": [
+                "./src/app/components/ui/alert-dialog/src/index.ts"
+            ],
+            "@spartan-ng/helm/aspect-ratio": [
+                "./src/app/components/ui/aspect-ratio/src/index.ts"
+            ],
+            "@spartan-ng/helm/autocomplete": [
+                "./src/app/components/ui/autocomplete/src/index.ts"
+            ],
+            "@spartan-ng/helm/avatar": [
+                "./src/app/components/ui/avatar/src/index.ts"
+            ],
+            "@spartan-ng/helm/badge": [
+                "./src/app/components/ui/badge/src/index.ts"
+            ],
+            "@spartan-ng/helm/breadcrumb": [
+                "./src/app/components/ui/breadcrumb/src/index.ts"
+            ],
+            "@spartan-ng/helm/button": [
+                "./src/app/components/ui/button/src/index.ts"
+            ],
+            "@spartan-ng/helm/button-group": [
+                "./src/app/components/ui/button-group/src/index.ts"
+            ],
+            "@spartan-ng/helm/calendar": [
+                "./src/app/components/ui/calendar/src/index.ts"
+            ],
+            "@spartan-ng/helm/card": [
+                "./src/app/components/ui/card/src/index.ts"
+            ],
+            "@spartan-ng/helm/carousel": [
+                "./src/app/components/ui/carousel/src/index.ts"
+            ],
+            "@spartan-ng/helm/checkbox": [
+                "./src/app/components/ui/checkbox/src/index.ts"
+            ],
+            "@spartan-ng/helm/collapsible": [
+                "./src/app/components/ui/collapsible/src/index.ts"
+            ],
+            "@spartan-ng/helm/command": [
+                "./src/app/components/ui/command/src/index.ts"
+            ],
+            "@spartan-ng/helm/context-menu": [
+                "./src/app/components/ui/context-menu/src/index.ts"
+            ],
+            "@spartan-ng/helm/date-picker": [
+                "./src/app/components/ui/date-picker/src/index.ts"
+            ],
+            "@spartan-ng/helm/dialog": [
+                "./src/app/components/ui/dialog/src/index.ts"
+            ],
+            "@spartan-ng/helm/dropdown-menu": [
+                "./src/app/components/ui/dropdown-menu/src/index.ts"
+            ],
+            "@spartan-ng/helm/empty": [
+                "./src/app/components/ui/empty/src/index.ts"
+            ],
+            "@spartan-ng/helm/field": [
+                "./src/app/components/ui/field/src/index.ts"
+            ],
+            "@spartan-ng/helm/form-field": [
+                "./src/app/components/ui/form-field/src/index.ts"
+            ],
+            "@spartan-ng/helm/hover-card": [
+                "./src/app/components/ui/hover-card/src/index.ts"
+            ],
+            "@spartan-ng/helm/icon": [
+                "./src/app/components/ui/icon/src/index.ts"
+            ],
+            "@spartan-ng/helm/input": [
+                "./src/app/components/ui/input/src/index.ts"
+            ],
+            "@spartan-ng/helm/input-group": [
+                "./src/app/components/ui/input-group/src/index.ts"
+            ],
+            "@spartan-ng/helm/input-otp": [
+                "./src/app/components/ui/input-otp/src/index.ts"
+            ],
+            "@spartan-ng/helm/item": [
+                "./src/app/components/ui/item/src/index.ts"
+            ],
+            "@spartan-ng/helm/kbd": [
+                "./src/app/components/ui/kbd/src/index.ts"
+            ],
+            "@spartan-ng/helm/label": [
+                "./src/app/components/ui/label/src/index.ts"
+            ],
+            "@spartan-ng/helm/menubar": [
+                "./src/app/components/ui/menubar/src/index.ts"
+            ],
+            "@spartan-ng/helm/navigation-menu": [
+                "./src/app/components/ui/navigation-menu/src/index.ts"
+            ],
+            "@spartan-ng/helm/pagination": [
+                "./src/app/components/ui/pagination/src/index.ts"
+            ],
+            "@spartan-ng/helm/popover": [
+                "./src/app/components/ui/popover/src/index.ts"
+            ],
+            "@spartan-ng/helm/progress": [
+                "./src/app/components/ui/progress/src/index.ts"
+            ],
+            "@spartan-ng/helm/radio-group": [
+                "./src/app/components/ui/radio-group/src/index.ts"
+            ],
+            "@spartan-ng/helm/resizable": [
+                "./src/app/components/ui/resizable/src/index.ts"
+            ],
+            "@spartan-ng/helm/scroll-area": [
+                "./src/app/components/ui/scroll-area/src/index.ts"
+            ],
+            "@spartan-ng/helm/select": [
+                "./src/app/components/ui/select/src/index.ts"
+            ],
+            "@spartan-ng/helm/separator": [
+                "./src/app/components/ui/separator/src/index.ts"
+            ],
+            "@spartan-ng/helm/sheet": [
+                "./src/app/components/ui/sheet/src/index.ts"
+            ],
+            "@spartan-ng/helm/sidebar": [
+                "./src/app/components/ui/sidebar/src/index.ts"
+            ],
+            "@spartan-ng/helm/skeleton": [
+                "./src/app/components/ui/skeleton/src/index.ts"
+            ],
+            "@spartan-ng/helm/slider": [
+                "./src/app/components/ui/slider/src/index.ts"
+            ],
+            "@spartan-ng/helm/sonner": [
+                "./src/app/components/ui/sonner/src/index.ts"
+            ],
+            "@spartan-ng/helm/spinner": [
+                "./src/app/components/ui/spinner/src/index.ts"
+            ],
+            "@spartan-ng/helm/switch": [
+                "./src/app/components/ui/switch/src/index.ts"
+            ],
+            "@spartan-ng/helm/table": [
+                "./src/app/components/ui/table/src/index.ts"
+            ],
+            "@spartan-ng/helm/tabs": [
+                "./src/app/components/ui/tabs/src/index.ts"
+            ],
+            "@spartan-ng/helm/textarea": [
+                "./src/app/components/ui/textarea/src/index.ts"
+            ],
+            "@spartan-ng/helm/toggle": [
+                "./src/app/components/ui/toggle/src/index.ts"
+            ],
+            "@spartan-ng/helm/toggle-group": [
+                "./src/app/components/ui/toggle-group/src/index.ts"
+            ],
+            "@spartan-ng/helm/tooltip": [
+                "./src/app/components/ui/tooltip/src/index.ts"
+            ],
+            "@spartan-ng/helm/typography": [
+                "./src/app/components/ui/typography/src/index.ts"
+            ],
+            "@spartan-ng/helm/utils": [
+                "./src/app/components/ui/utils/src/index.ts"
+            ]
+        }
+    },
+    "angularCompilerOptions": {
+        "enableI18nLegacyMessageIdFormat": false,
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true
+    }
+}

@@ -1,0 +1,94 @@
+@reference "../../../styles.css";
+
+.node {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    padding: 0;
+    width: 60px;
+    height: 60px;
+    @apply rounded-xl;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    transition:
+        top 100ms,
+        left 100ms,
+        border 100ms,
+        color 100ms,
+        background-color 100ms,
+        transform 100ms;
+    cursor: pointer;
+}
+
+.node .phantom-attacker {
+    position: absolute;
+    transform: translate(8px, 8px);
+}
+
+.node ::ng-deep .phantom-attacker svg {
+    stroke-width: 2.5px !important;
+    @apply fill-card-foreground text-card;
+}
+
+.node:focus {
+    @apply ring-0 ring-offset-0;
+}
+
+.node.dragging {
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 30;
+    transition: transform 100ms;
+    cursor: grabbing;
+}
+
+.node.focused {
+    z-index: 30;
+    @apply border-primary border-0;
+    @apply text-primary-foreground;
+    @apply bg-primary;
+}
+
+.node.focused ::ng-deep .phantom-attacker svg {
+    @apply fill-primary-foreground text-primary;
+}
+
+.node.communicating {
+    z-index: 30;
+    @apply border-primary border-2;
+}
+
+.node-info {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transform: translate(0, -50%);
+    transform-origin: center;
+    z-index: 10;
+    transition:
+        top 100ms,
+        left 100ms,
+        opacity 100ms;
+    margin-left: calc(30px + 12px);
+    width: auto;
+    height: 60px;
+    pointer-events: none;
+    @apply select-none;
+
+    ::ng-deep .high-contrast & {
+        margin-left: calc(30px + 4px);
+        @apply bg-card! rounded-md! px-2! py-1!;
+    }
+
+    ::ng-deep .high-contrast & * {
+        @apply text-primary! opacity-100!;
+    }
+}
+
+.node-info.dragging {
+    opacity: 0;
+    transition: opacity 100ms;
+}

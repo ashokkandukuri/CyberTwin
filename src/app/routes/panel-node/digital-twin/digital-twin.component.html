@@ -1,0 +1,145 @@
+@if (twin(); as twin) {
+    <!-- Twin Identity -->
+    <div class="flex flex-col gap-1">
+        <span class="text-muted-foreground text-xs uppercase tracking-wider">{{ "DT_TWIN_ID" | translate }}</span>
+        <span class="text-xs font-mono break-all">{{ twin.id }}</span>
+    </div>
+
+    <!-- Device Identity -->
+    <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-0.5">
+            <span class="text-muted-foreground text-xs">{{ "DT_DEVICE_ID" | translate }}</span>
+            <span class="text-sm font-mono">{{ twin.nodeMac }}</span>
+        </div>
+        <div class="flex flex-col gap-0.5">
+            <span class="text-muted-foreground text-xs">{{ "DT_DEVICE_TYPE" | translate }}</span>
+            <span class="text-sm capitalize">{{ twin.deviceType }}</span>
+        </div>
+    </div>
+
+    <!-- States -->
+    <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs">{{ "DT_OPERATIONAL_STATE" | translate }}</span>
+            <span hlmBadge [variant]="stateBadgeVariant()" class="w-fit text-xs">
+                {{ stateLabel() | translate }}
+            </span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs">{{ "DT_SECURITY_STATE" | translate }}</span>
+            <span hlmBadge [variant]="stateBadgeVariant()" class="w-fit text-xs">
+                {{ stateLabel() | translate }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Telemetry Section -->
+    @if (telemetry(); as t) {
+        <div class="bg-muted/50 rounded-md p-3 mt-1">
+            <div class="text-xs font-medium uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <ng-icon name="lucideActivity" size="0.875rem" />
+                {{ "DT_TELEMETRY" | translate }}
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                <!-- CPU -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideCpu" size="0.75rem" />
+                        {{ "DT_CPU" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.cpuUtilization | number:'1.1-1' }}%</span>
+                </div>
+
+                <!-- Memory -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideHardDrive" size="0.75rem" />
+                        {{ "DT_MEMORY" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.memoryUtilization | number:'1.1-1' }}%</span>
+                </div>
+
+                <!-- Packets/sec -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideActivity" size="0.75rem" />
+                        {{ "DT_PACKETS_SEC" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.packetsPerSecond | number:'1.0-1' }}</span>
+                </div>
+
+                <!-- Bandwidth -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideGauge" size="0.75rem" />
+                        {{ "DT_BANDWIDTH" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.bandwidthUsage | number:'1.0-0' }} B/s</span>
+                </div>
+
+                <!-- Latency -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideWifi" size="0.75rem" />
+                        {{ "DT_LATENCY" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.latency | number:'1.0-0' }} ms</span>
+                </div>
+
+                <!-- Packet Loss -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground">{{ "DT_PACKET_LOSS" | translate }}</span>
+                    <span class="font-mono tabular-nums">{{ t.packetLoss | number:'1.1-1' }}%</span>
+                </div>
+
+                <!-- Connections -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground">{{ "DT_CONNECTIONS" | translate }}</span>
+                    <span class="font-mono tabular-nums">{{ t.connectionCount }}</span>
+                </div>
+
+                <!-- Temperature -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideThermometer" size="0.75rem" />
+                        {{ "DT_TEMPERATURE" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.temperature | number:'1.1-1' }}°C</span>
+                </div>
+
+                <!-- Battery -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground flex items-center gap-1">
+                        <ng-icon name="lucideBatteryFull" size="0.75rem" />
+                        {{ "DT_BATTERY" | translate }}
+                    </span>
+                    <span class="font-mono tabular-nums">{{ t.batteryLevel | number:'1.1-1' }}%</span>
+                </div>
+
+                <!-- Auth Failures -->
+                <div class="flex items-center justify-between">
+                    <span class="text-muted-foreground">{{ "DT_AUTH_FAILURES" | translate }}</span>
+                    <span class="font-mono tabular-nums">{{ t.authFailures }}</span>
+                </div>
+
+                <!-- Sensor Reading -->
+                <div class="flex items-center justify-between col-span-2">
+                    <span class="text-muted-foreground">{{ "DT_SENSOR_READING" | translate }}</span>
+                    <span class="font-mono tabular-nums">{{ t.sensorReading | number:'1.2-2' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last Updated -->
+        <div class="flex items-center justify-between text-xs text-muted-foreground mt-1">
+            <span>{{ "DT_LAST_UPDATED" | translate }}</span>
+            <span class="font-mono">{{ twin.lastUpdate | date:'HH:mm:ss' }}</span>
+        </div>
+    }
+} @else {
+    <div class="flex flex-col items-center justify-center py-8 text-muted-foreground">
+        <ng-icon name="lucideShield" size="2rem" class="mb-2 opacity-50" />
+        <p class="text-sm">{{ "DT_NO_TWIN" | translate }}</p>
+    </div>
+}
